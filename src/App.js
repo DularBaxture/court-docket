@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import "bootstrap/dist/js/bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import "./styles.css";
@@ -69,11 +71,14 @@ const DropDrag = ({}) => {
 
   const generateDOM = () => {
     return _.map(layouts.lg, function (l) {
-      console.log("data", l);
       return (
-        <div key={l.i} style={{ background: "#ccc" }}>
-          <div className="text">{layoutAllHeaders[l.i]}</div>
-          <div>Data</div>
+        <div key={l.i} className="bg-white border border-1 p-3">
+          <div className="grid-item__header">
+            <div className="py-2 h4 fw-medium text-black-50">
+              {layoutAllHeaders[l.i]}
+            </div>
+          </div>
+          <div className="h2">Data from backend</div>
         </div>
       );
     });
@@ -103,8 +108,10 @@ const DropDrag = ({}) => {
           preventCollision={!compactType}
           onLayoutChange={onLayoutChange}
           onBreakpointChange={onBreakpointChange}
+          draggableHandle=".grid-item__header"
           // onDrop={onDrop}
-          isDroppable
+          // isDroppable
+          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         >
           {generateDOM()}
         </ResponsiveReactGridLayout>
