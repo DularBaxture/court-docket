@@ -4,6 +4,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import "./styles.css";
+import { defaultLayoutData, layoutAllHeaders } from "./court-docket/constant";
 
 // interface Props {
 //   domElements: any[];
@@ -17,18 +18,9 @@ import "./styles.css";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const DropDrag = (props) => {
+const DropDrag = ({}) => {
   const [layouts, setLayouts] = useState({
-    lg: _.map(_.range(0, 25), function (item, i) {
-      var y = Math.ceil(Math.random() * 4) + 1;
-      return {
-        x: (_.random(0, 5) * 2) % 12,
-        y: Math.floor(i / 6) * y,
-        w: 2,
-        h: y,
-        i: i.toString(),
-      };
-    }),
+    lg: [...defaultLayoutData],
   });
   const [currentBreakpoint, setCurrentBreakpoint] = useState("lg");
   const [compactType, setCompactType] = useState("vertical");
@@ -76,16 +68,18 @@ const DropDrag = (props) => {
   // };
 
   const generateDOM = () => {
-    return _.map(layouts.lg, function (l, i) {
+    return _.map(layouts.lg, function (l) {
+      console.log("data", l);
       return (
-        <div key={i} style={{ background: "#ccc" }}>
-          <span className="text">{i}</span>
+        <div key={l.i} style={{ background: "#ccc" }}>
+          <div className="text">{layoutAllHeaders[l.i]}</div>
+          <div>Data</div>
         </div>
       );
     });
   };
 
-  console.log("layout", layouts);
+  console.log("layouts", layouts);
 
   return (
     <>
@@ -100,7 +94,7 @@ const DropDrag = (props) => {
 
       <div className="mb-4">
         <ResponsiveReactGridLayout
-          {...props}
+          // {...props}
           style={{ background: "#f0f0f0" }}
           layouts={layouts}
           measureBeforeMount={false}
