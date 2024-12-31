@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import "../node_modules/react-grid-layout/css/styles.css";
-import "../node_modules/react-resizable/css/styles.css";
+import { StrictMode } from "react";
+import * as ReactDOMClient from "react-dom/client";
+
 import App from "./App";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root");
+const root = ReactDOMClient.createRoot(rootElement);
+
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 );
