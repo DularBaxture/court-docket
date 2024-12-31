@@ -7,7 +7,6 @@ const ChangeLayoutCourtDocket = () => {
   const [layouts, setLayouts] = useState({
     lg: [...defaultLayoutData],
   });
-  // const [layouts, setLayouts] = useState({});
   const [selectOptions, setSelectOptions] = useState({
     orderNo: false,
     startTime: false,
