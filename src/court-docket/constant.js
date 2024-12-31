@@ -23,14 +23,14 @@ export const defaultLayoutData = [
   {
     w: 2,
     h: 2,
-    x: 8,
+    x: 6,
     y: 0,
     i: "offense",
   },
   {
     w: 2,
     h: 2,
-    x: 6,
+    x: 8,
     y: 0,
     i: "offenseDate",
   },
