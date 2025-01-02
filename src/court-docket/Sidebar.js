@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { layoutAllHeaders } from "./constant";
 
 const Sidebar = ({ selectOptions, handleSelectOptions }) => {
-  useEffect(() => {
-    console.log("data");
-  }, []);
   return (
-    <div className="p-2 border border-1">
+    <div className="p-2 border border-1 vh-100">
       {Object.keys(layoutAllHeaders).map((optionName) => {
         return (
-          <div className="form-check" key={optionName}>
+          <div
+            className="form-check py-2 border-bottom border-1"
+            key={optionName}
+          >
             <input
               className="form-check-input"
               type="checkbox"
-              value={selectOptions[optionName]}
+              checked={selectOptions[optionName]}
               id={optionName}
               onChange={handleSelectOptions}
             />

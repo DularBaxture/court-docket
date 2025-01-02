@@ -33,7 +33,39 @@ const ChangeLayoutCourtDocket = () => {
   });
 
   const handleSetSelectOption = (event) => {
-    console.log("event", event);
+    const { id, checked } = event.target;
+
+    setSelectOptions((prevState) => ({
+      ...prevState,
+      [id]: checked,
+    }));
+
+    setLayouts((prevState) => {
+      if (checked) {
+        // Add new item to layout when checkbox is checked
+        return {
+          lg: [
+            ...prevState.lg,
+            {
+              i: id,
+              x: (prevState.lg.length * 2) % 12, // Distribute items horizontally
+              y: Math.floor(prevState.lg.length / 6), // New row every 6 items
+              w: 2,
+              h: 1,
+            },
+          ],
+        };
+      } else {
+        // Remove item from layout when checkbox is unchecked
+        return {
+          lg: prevState.lg.filter((item) => item.i !== id),
+        };
+      }
+    });
+  };
+
+  const handlePrintDocket = () => {
+    console.log("layouts", layouts);
   };
 
   useEffect(() => {
@@ -47,7 +79,18 @@ const ChangeLayoutCourtDocket = () => {
   }, []);
 
   return (
-    <div className="d-flex">
+    <div className="d-flex position-relative">
+      <button
+        className="btn btn-primary position-absolute"
+        style={{
+          top: "10px",
+          right: "10px",
+          zIndex: 1000,
+        }}
+        onClick={handlePrintDocket}
+      >
+        Print Docket
+      </button>
       <div className="w-25">
         <Sidebar
           selectOptions={selectOptions}

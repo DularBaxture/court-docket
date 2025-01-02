@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { defaultLayoutData, layoutAllHeaders } from "../court-docket/constant";
+import { layoutAllHeaders } from "../court-docket/constant";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const DropDrag = ({
@@ -10,9 +10,6 @@ const DropDrag = ({
   layouts = {},
   setLayouts,
 }) => {
-  //   const [layouts, setLayouts] = useState({
-  //     lg: [...defaultLayoutData],
-  //   });
   const [currentBreakpoint, setCurrentBreakpoint] = useState("lg");
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
@@ -61,13 +58,13 @@ const DropDrag = ({
   const generateDOM = () => {
     return _.map(layouts.lg, function (l) {
       return (
-        <div key={l.i} className="bg-white border border-1 p-3 rounded">
+        <div key={l.i} className="bg-white border border-1 px-2 rounded">
           <div className="grid-item__header">
-            <div className="py-2 h4 fw-medium text-black-50">
+            <div className="py-2 h5 fw-medium text-black-50">
               {layoutAllHeaders[l.i]}
             </div>
           </div>
-          <div className="h2">Data from backend</div>
+          <div className="h5 pb-2">Data from backend</div>
         </div>
       );
     });
@@ -84,7 +81,7 @@ const DropDrag = ({
         Droppable Element (Drag me!)
       </div> */}
 
-      <div className="mb-4">
+      <div className="mb-4 page-container">
         <ResponsiveReactGridLayout
           // {...props}
           style={{ background: "#f0f0f0" }}
