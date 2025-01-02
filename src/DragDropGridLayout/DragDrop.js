@@ -6,9 +6,10 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const DropDrag = ({
   isDraggable = false,
-  isDroppable = false,
+  isResizable = false,
   layouts = {},
   setLayouts,
+  data = {},
 }) => {
   const [currentBreakpoint, setCurrentBreakpoint] = useState("lg");
   const [compactType, setCompactType] = useState("vertical");
@@ -64,7 +65,7 @@ const DropDrag = ({
               {layoutAllHeaders[l.i]}
             </div>
           </div>
-          <div className="h5 pb-2">Data from backend</div>
+          <div className="h5 pb-2">{data[l.i] ? data[l.i] : "-No Data-"}</div>
         </div>
       );
     });
@@ -80,28 +81,24 @@ const DropDrag = ({
       >
         Droppable Element (Drag me!)
       </div> */}
-
-      <div className="mb-4 page-container">
-        <ResponsiveReactGridLayout
-          // {...props}
-          style={{ background: "#f0f0f0" }}
-          layouts={layouts}
-          measureBeforeMount={false}
-          useCSSTransforms={mounted}
-          compactType={compactType}
-          preventCollision={!compactType}
-          onLayoutChange={onLayoutChange}
-          onBreakpointChange={onBreakpointChange}
-          draggableHandle=".grid-item__header"
-          // isDraggable={isDraggable}
-          // onDrop={onDrop}
-          // isDroppable
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        >
-          {generateDOM()}
-        </ResponsiveReactGridLayout>
-      </div>
+      <ResponsiveReactGridLayout
+        // {...props}
+        style={{ background: "#f0f0f0" }}
+        layouts={layouts}
+        measureBeforeMount={false}
+        useCSSTransforms={mounted}
+        compactType={compactType}
+        preventCollision={!compactType}
+        onLayoutChange={onLayoutChange}
+        onBreakpointChange={onBreakpointChange}
+        draggableHandle=".grid-item__header"
+        isResizable={isResizable}
+        isDraggable={isDraggable}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+      >
+        {generateDOM()}
+      </ResponsiveReactGridLayout>
     </>
   );
 };

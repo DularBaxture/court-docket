@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import DropDrag from "../DragDropGridLayout/DragDrop";
 import { defaultLayoutData } from "./constant";
+import { useNavigate } from "react-router-dom";
 
 const ChangeLayoutCourtDocket = () => {
   const [layouts, setLayouts] = useState({
@@ -31,6 +32,8 @@ const ChangeLayoutCourtDocket = () => {
     plaintiffAttorney: false,
     courtAppointedAttorney: false,
   });
+
+  const navigate = useNavigate();
 
   const handleSetSelectOption = (event) => {
     const { id, checked } = event.target;
@@ -65,7 +68,7 @@ const ChangeLayoutCourtDocket = () => {
   };
 
   const handlePrintDocket = () => {
-    console.log("layouts", layouts);
+    navigate("/print-docket", { state: { layouts } });
   };
 
   useEffect(() => {
@@ -97,8 +100,15 @@ const ChangeLayoutCourtDocket = () => {
           handleSelectOptions={handleSetSelectOption}
         />
       </div>
-      <div className="w-75">
-        <DropDrag isDraggable layouts={layouts} setLayouts={setLayouts} />
+      <div className="w-75 ">
+        <div className="page-container">
+          <DropDrag
+            isDraggable
+            isResizable
+            layouts={layouts}
+            setLayouts={setLayouts}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { mockDocketData, defaultLayoutData } from "./constant";
 import DropDrag from "../DragDropGridLayout/DragDrop";
+import { useLocation } from "react-router-dom";
 
 const PrintLayout = () => {
-  const [layouts, setLayouts] = useState({ lg: defaultLayoutData });
+  const location = useLocation();
+  const [layouts, setLayouts] = useState(
+    location.state?.layouts || { lg: defaultLayoutData }
+  );
   const handlePrint = () => {
     window.print();
   };
@@ -11,7 +15,10 @@ const PrintLayout = () => {
   return (
     <div className="print-layout">
       <div className="print-header" style={{ pageBreakInside: "avoid" }}>
-        <button onClick={handlePrint} className="print-button">
+        <button
+          onClick={handlePrint}
+          className="btn btn-secondary m-4 print-button"
+        >
           Print Docket
         </button>
       </div>
@@ -19,7 +26,7 @@ const PrintLayout = () => {
       {mockDocketData.map((docket, index) => (
         <div
           key={index}
-          className="page-container"
+          className="page-container mb-3"
           style={{ pageBreakAfter: "always" }}
         >
           <DropDrag data={docket} layouts={layouts} setLayouts={setLayouts} />
